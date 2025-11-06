@@ -5,8 +5,8 @@ export const SCENE_SETTINGS = {
 
 export const BALL_SETTINGS = {
   radius: 14,
-  initialSpeed: 5,
-  incrementalSpeed: 0.0005,
+  initialSpeed: 6,
+  incrementalSpeed: 0.001,
   color: "pink",
 };
 
