@@ -74,9 +74,9 @@ class Ball {
     ctx.closePath();
   }
 
-  public move() {
-    const newX = this.x + this.direction[0] * this.speed;
-    const newY = this.y + this.direction[1] * this.speed;
+  public move(deltaTime: number) {
+    const newX = this.x + this.direction[0] * this.speed * deltaTime;
+    const newY = this.y + this.direction[1] * this.speed * deltaTime;
 
     this.x = newX;
     this.y = newY;

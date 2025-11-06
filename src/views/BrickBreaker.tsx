@@ -47,6 +47,7 @@ const BrickBreaker = () => {
 
     //========== GAME STATE LOGIC =========//
 
+    let lastTime = 0;
     let isGameRunning = true;
 
     //========== SCENE =========//
@@ -309,10 +310,14 @@ const BrickBreaker = () => {
       player.MoveX(clientX);
     };
 
-    const mainLoop = () => {
+    const mainLoop = (time: number) => {
+      if (lastTime <= 0) lastTime = time;
+
+      const deltaTime = (time - lastTime) / 10;
+
       handleGameState();
 
-      ball.move();
+      ball.move(deltaTime);
       handleScreenCollision();
       handleBallCollisionWithBricks();
       handleBallCollisionWithPlayer();
@@ -320,6 +325,8 @@ const BrickBreaker = () => {
 
       ctx.reset();
       renderFrame();
+
+      lastTime = time;
 
       if (!isGameRunning) {
         ball.stop();
@@ -332,7 +339,7 @@ const BrickBreaker = () => {
       requestAnimationFrame(mainLoop);
     };
 
-    const animationFrameId = requestAnimationFrame(mainLoop);
+    const animationFrameId = requestAnimationFrame(time => mainLoop(time));
 
     window.addEventListener("pointermove", handlePointerMove);
 
